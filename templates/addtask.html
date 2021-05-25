@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html5>
+<html>
+<title>TODO list</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'css/indexstyle.css' %}">
+<style>
+body {font-family: "Times New Roman", Georgia, Serif;}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display";
+  letter-spacing: 5px;
+}
+</style>
+<body>
+    <div class="w3-container w3-padding-64" id="contact">
+        <h1>Add a Task</h1><br>
+
+        <form method="POST" target="_parent" >
+        {% csrf_token %}
+          <p><input class="w3-input w3-padding-16" type="text" value="{{name}}" readonly name="username"></p>
+          <p><input class="w3-input w3-padding-16" type="text" placeholder="Heading of the task" required name="heading"></p>
+          <p><input class="w3-input w3-padding-16" type="text" placeholder="Description (optional)" name="description"></p>
+          <p><input class="w3-input w3-padding-16" type="datetime-local" placeholder="Deadline of the Task" name="date"></p>
+          <p>On Submission you will be redirected to the previous page. Kindly login again to view the updated list. </p>
+          <p><button formaction="/todolist/addtask" class="w3-button w3-light-grey w3-section" type="submit">Create Task</button></p>
+        </form>
+
+      </div>
+
+</body>
+</html>

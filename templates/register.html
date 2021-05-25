@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6 ielt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7 ielt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Project-2 | Register</title>
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+</head>
+<body>
+<div class="container">
+  <section id="content">
+    <form method="POST" target="_self">
+      {% csrf_token %}
+      <h1>Registration</h1>
+      {{ msg }}
+      {% if flag == True %}
+      <div>
+        <input type="text" placeholder="Username" required="" name="username" id="username" />
+      </div>
+	    <div>
+        <input type="text" placeholder="First Name" required="" name="fname" id="fname" />
+      </div>
+	    <div>
+        <input type="text" placeholder="Last Name" name="lname" id="lname" />
+      </div>
+	    <div>
+        <input type="text" placeholder="Email id" required="" name="email" id="email" />
+      </div>
+      {% if messages %}
+      <div>
+        {% for m in messages %}
+        <p>{{m}}</p>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div>
+        <input type="password" placeholder="Password" required="" name="pass1" id="password" />
+      </div>
+      <div>
+        <input type="password" placeholder="Re-enter Password" required="" name="pass2" id="password" />
+      </div>
+      <div>
+        <input type="submit" formaction="regsub" value="Register" />
+        <a href="login">Back to Login Page</a>
+      </div>
+
+      {% else %}
+      
+
+
+      <div>
+        <input type="text" value="{{username}}" name="username" id="username" readonly/>
+      </div>
+	    <div>
+        <input type="text" value="{{fname}}" name="fname" id="fname" readonly/>
+      </div>
+	    <div>
+        <input type="text" value="{{lname}}" name="lname" id="lname" readonly/>
+      </div>
+	    <div>
+        <input type="text" value="{{email}}" name="email" id="email" readonly/>
+      </div>
+      <div>
+        <input type="password" value="{{password}}" name="pass1" id="password" readonly/>
+      </div>
+      {% if messages %}
+      <div>
+        {% for m in messages %}
+        <p>{{m}}</p>
+        {% endfor %}
+      </div>
+      {% endif %}
+      <div>
+        <input type="password" placeholder="Enter the OTP" name="otp" id="password"/>
+      </div>
+      <div>
+        <input type="submit" formaction="reverify" value="Register" />
+        <a href="login">Back to Login Page</a>
+      </div>
+      {% endif %}
+  </form><!-- form -->
+    
+  </section><!-- content -->
+</div><!-- container -->
+</body>
+</html>

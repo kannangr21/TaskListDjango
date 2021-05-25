@@ -1,0 +1,100 @@
+{% load static %}
+{% load mathfilters %}
+<!DOCTYPE html5>
+<html>
+<title>TODO list</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'css/indexstyle.css' %}">
+<style>
+body {font-family: "Times New Roman", Georgia, Serif;}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display";
+  letter-spacing: 5px;
+}
+</style>
+<body>
+
+<!-- Navbar (sit on top) -->
+<div class="w3-top">
+  <div class="w3-bar w3-white w3-padding w3-card" style="letter-spacing:4px;">
+    <a href="#home" class="w3-bar-item w3-button">TO-DO list</a>
+    <!-- Right-sided navbar links. Hide them on small screens -->
+    <div class="w3-right w3-hide-small">
+      <a href="#menu" class="w3-bar-item w3-button">List</a>
+      <a href="#contact" class="w3-bar-item w3-button">Contact</a>
+    </div>
+    <div class="w3-right w3-hide-small">
+    <a class="w3-bar-item">Hello! {{name}}</a>
+    </div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="w3-display-container w3-content w3-wide" style="max-width:1600px;min-width:500px" id="home">
+ 
+</header>
+
+<!-- Page content -->
+<div class="w3-content" style="max-width:1100px">
+
+  <hr>
+ 
+  <!-- Menu Section -->
+  <div class="w3-row w3-padding-64" id="menu">
+    <div class="w3-col l6 w3-padding-large">
+      <h1 class="w3-center">Your TO-DO List</h1><br>
+      {% for i, j, k, n in tasks %}
+      <h4>{{n|addition:1}}.{{i}}</h4>
+      <p class="w3-text-grey">{{j}}</p>
+      <p class="w3-text-grey">Deadline : {{k}}</p><br>
+      {% endfor %}    
+    </div>
+    
+    <div class="subscribe">
+        <form action="/todolist/addtask" method="POST" target="popupwindow" onsubmit="window.open('', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true" >
+        {% csrf_token %}
+        <p><input type="hidden" value="{{name}}" name="username" /></p>
+        <p><button class="w3-button w3-light-grey w3-section" type="submit">Add a Task</button></p>
+        </form>
+        <form action="/todolist/deltask" method="POST" target="popupwindow" onsubmit="window.open('', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true" >
+        {% csrf_token %}
+        <p><input type="hidden" value="{{name}}" name="username" /></p>
+        <p><button class="w3-button w3-light-grey w3-section" type="submit">Delete Tasks</button></p>
+        </form>
+  </div>
+
+  </div>
+  <p><h3>{{msg}}</h3></p>
+  <hr>
+
+  <!-- Contact Section -->
+  <div class="w3-container w3-padding-64" id="contact">
+    <h1>Contact</h1><br>
+    <p>Thank you for visiting and experiencing this web page. Please feel free to rate this project in the form below. Your suggestions are always welcome.</p>
+    
+    <p>Contact us by phone +91 8838 177 334 or email kannanravi2105@gmail.com, or you can send us a message here:</p>
+    <form action="/todolist/sendmsg" method="POST">
+      {% csrf_token %}
+      <p><input class="w3-input w3-padding-16" type="hidden" value="{{name}}" name="Name"></p>
+      <p><input class="w3-input w3-padding-16" type="number" placeholder="Rating" min="0" max="10" required name="Rating"></p>
+      <p><input class="w3-input w3-padding-16" type="text" placeholder="Message / Feedback" required name="Message"></p>
+      <p><button class="w3-button w3-light-grey w3-section" type="submit">SEND MESSAGE</button></p>
+    </form>
+
+
+    <form action="/enter/logout">
+    <p><button class="w3-button w3-light-grey w3-section" type="submit">Logout</button></p>
+    </form>
+  </div>
+  
+<!-- End page content -->
+</div>
+
+<!-- Footer -->
+<footer class="w3-center w3-light-grey w3-padding-32">
+  <p>Developed by Kannan G R.</p>
+</footer>
+
+</body>
+</html>

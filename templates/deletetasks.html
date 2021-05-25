@@ -1,0 +1,35 @@
+{% load static %}
+{% load mathfilters %}
+<!DOCTYPE html5>
+<html>
+<title>TODO list</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{% static 'css/indexstyle.css' %}">
+<style>
+body {font-family: "Times New Roman", Georgia, Serif;}
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display";
+  letter-spacing: 5px;
+}
+</style>
+<body>
+    <div class="w3-container w3-padding-64" id="contact">
+        <h1>Delete Tasks</h1><br>
+        <form method="POST" target="_parent" >
+        {% csrf_token %}
+        <p><input class="w3-input w3-padding-16" type="text" value="{{name}}" readonly name="username"></p>
+        <div class="w3-col l6 w3-padding-large">
+            {% for i, j, k, n in tasks %}
+            <h4> <input type="checkbox" name="{{n}}"/> {{n|addition:1}}.{{i}}</h4>
+            <p class="w3-text-grey">{{j}}</p>
+            <p class="w3-text-grey">Deadline : {{k}}</p><br>
+            {% endfor %}
+            <p>On Submission you will be redirected to the previous page. Kindly login again to view the updated list. </p>
+            <p><button formaction="/todolist/delete" class="w3-button w3-light-grey w3-section" type="submit">Delete Tasks</button></p>    
+        </div>
+        </form>
+    </div>
+
+</body>
+</html>
